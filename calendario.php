@@ -77,6 +77,7 @@
                   <gantt first-day-of-week="1"
                     load-data="loadData = fn"
                     remove-data="removeData = fn"
+                    save-data="saveData = fn"
                     clear-data="clearData = fn"
                     sort-mode="name"
                     view-scale="scale"

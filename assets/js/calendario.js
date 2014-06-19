@@ -132,7 +132,7 @@ demoApp.controller("ctrl", ['$scope', '$http', '$filter', function($scope, $http
         console.debug("click en ROW", event)
 
         // fecha y hora donde se ha hecho click
-        var  tempdate = new Date(event.date);
+        var tempdate = new Date(event.date);
         var fechaFrom = ($filter('date')(tempdate, "yyyy-MM-dd H:00"));
 
         // añade una hora 
@@ -184,6 +184,7 @@ demoApp.controller("ctrl", ['$scope', '$http', '$filter', function($scope, $http
      * @return {[type]}       [description]
      */
     $scope.taskEvent = function(event) {
+ $scope.saveData();
         // A task has been updated or clicked.
         console.log(event);
         // pone clase intermitente a las tareas que hagamos click

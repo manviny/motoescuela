@@ -40,6 +40,7 @@ gantt.directive('gantt', ['Gantt', 'dateFunctions', 'mouseOffset', 'debounce', '
             data: "=?",
             loadData: "&",
             removeData: "&",
+            saveData: "&",
             clearData: "&",
             centerDate: "&",
             onLabelsResized: "&",
@@ -157,30 +158,27 @@ $scope.calendarioGuardar = function() {
 /**
  * Borrar tareas qeu tienen clase intermitente
  */
-$scope.borrarTareas = function() {
-    alert("borrar tareas")
-    _($scope.gantt.rows).forEach(function(fila) { 
-        _(fila.tasks).forEach(function(hora) { 
-            if(hora.classes == 'intermitente') {
-                console.log( hora.id );
+// $scope.borrarTareas = function() {
 
-                 $http({
-                    url: 'http://chocomputer.com:3005/api/calendarios/' + hora.id ,
-                    method: "DELETE"
-                })
-                .then(function(response) {
-                        alert("success");
-                        alert(JSON.stringify(response));
-                    }, 
-                    function(response) { // optional
-                        alert("fail");
-                        alert(JSON.stringify(response));
-                    }
-                );
-            } //if
-        });        
-    });
-}
+//     _($scope.gantt.rows).forEach(function(fila) { 
+//         _(fila.tasks).forEach(function(hora) { 
+//             if(hora.classes == 'intermitente') {
+//                 console.log( fila );
+//                 console.log( hora.id );
+//                 // $scope.removeData([]);
+//                 $scope.removeData([
+//                     {"id": "IBR1-9083GFL", "tasks": [
+//                         {"id": "IBR1-9083GFLIBR1-9083GFLIBR1-9083GFLIBR1-9083GFLIBR1-9083GFLIBR1-9083GFLIBR1-9083GFL1403193614224"}
+//                     ]} // Remove order basket from Sprint 2
+//                 ]);
+//                 console.log( fila );
+//                 // $scope.calendarioGuardar();
+//             }
+                
+//         });        
+//     });
+// }
+
 
             // Swaps two rows and changes the sort order to custom to display the swapped rows
             $scope.swapRows = function (a, b) {
@@ -323,6 +321,7 @@ $scope.borrarTareas = function() {
             // Remove data handler.
             // If a row has no tasks inside the complete row will be deleted.
             $scope.removeData({ fn: function(data) {
+
                 for (var i = 0, l = data.length; i < l; i++) {
                     var rowData = data[i];
 
@@ -347,10 +346,15 @@ $scope.borrarTareas = function() {
                 $scope.sortRows();
             }});
 
+
+$scope.saveData({ fn: function(data) {
+console.log("hi mate")
+
+}});
             // Clear all existing rows and tasks
             $scope.removeAllData = function() {
                 $scope.gantt.removeRows();
-            };
+            };            
 
             // Bind scroll event
             $scope.ganttScroll.bind('scroll', $scope.raiseScrollEvent);
