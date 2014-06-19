@@ -154,7 +154,33 @@ $scope.calendarioGuardar = function() {
 
 }; // calendarioGuardar
 
+/**
+ * Borrar tareas qeu tienen clase intermitente
+ */
+$scope.borrarTareas = function() {
+    alert("borrar tareas")
+    _($scope.gantt.rows).forEach(function(fila) { 
+        _(fila.tasks).forEach(function(hora) { 
+            if(hora.classes == 'intermitente') {
+                console.log( hora.id );
 
+                 $http({
+                    url: 'http://chocomputer.com:3005/api/calendarios/' + hora.id ,
+                    method: "DELETE"
+                })
+                .then(function(response) {
+                        alert("success");
+                        alert(JSON.stringify(response));
+                    }, 
+                    function(response) { // optional
+                        alert("fail");
+                        alert(JSON.stringify(response));
+                    }
+                );
+            } //if
+        });        
+    });
+}
 
             // Swaps two rows and changes the sort order to custom to display the swapped rows
             $scope.swapRows = function (a, b) {
