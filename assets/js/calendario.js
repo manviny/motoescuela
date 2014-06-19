@@ -186,7 +186,10 @@ demoApp.controller("ctrl", ['$scope', '$http', '$filter', function($scope, $http
     $scope.taskEvent = function(event) {
         // A task has been updated or clicked.
         console.log(event);
-        event.task.classes=( "intermitente");
+
+        // pone clase intermitente a las tareas que hagamos click
+        if(event.task.classes == "intermitente") event.task.classes= "" else event.task.classes= "intermitente";
+
         // pon los datos del evento en el formulario
         $scope.nombre = event.task.subject;
         $scope.circuito = event.task.data.circuito;
