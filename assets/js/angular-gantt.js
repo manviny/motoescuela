@@ -40,7 +40,10 @@ gantt.directive('gantt', ['Gantt', 'dateFunctions', 'mouseOffset', 'debounce', '
             data: "=?",
             loadData: "&",
             removeData: "&",
+
             saveData: "&",
+            removeTask: "&",
+
             clearData: "&",
             centerDate: "&",
             onLabelsResized: "&",
@@ -160,26 +163,31 @@ $scope.saveData({ fn: function(apiURL) {
 /**
  * Borrar tareas qeu tienen clase intermitente
  */
-// $scope.borrarTareas = function() {
 
-//     _($scope.gantt.rows).forEach(function(fila) { 
-//         _(fila.tasks).forEach(function(hora) { 
-//             if(hora.classes == 'intermitente') {
-//                 console.log( fila );
-//                 console.log( hora.id );
-//                 // $scope.removeData([]);
-//                 $scope.removeData([
-//                     {"id": "IBR1-9083GFL", "tasks": [
-//                         {"id": "IBR1-9083GFLIBR1-9083GFLIBR1-9083GFLIBR1-9083GFLIBR1-9083GFLIBR1-9083GFLIBR1-9083GFL1403193614224"}
-//                     ]} // Remove order basket from Sprint 2
-//                 ]);
-//                 console.log( fila );
-//                 // $scope.calendarioGuardar();
-//             }
+
+$scope.removeTask({ fn: function(data) {
+ console.debug("xx","remove task");
+    // _($scope.gantt.rows).forEach(function(fila) { 
+    //     _(fila.tasks).forEach(function(hora) { 
+    //         if(hora.classes == 'intermitente') {
+    //             console.log( fila );
+    //             console.log( hora.id );
+    //             // $scope.removeData([]);
+    //             $scope.removeData([
+    //                 {"id": "IBR1-9083GFL", "tasks": [
+    //                     {"id": "IBR1-9083GFLIBR1-9083GFLIBR1-9083GFLIBR1-9083GFLIBR1-9083GFLIBR1-9083GFLIBR1-9083GFL1403193614224"}
+    //                 ]} // Remove order basket from Sprint 2
+    //             ]);
+    //             console.log( fila );
+    //             // $scope.calendarioGuardar();
+    //         }
                 
-//         });        
-//     });
-// }
+    //     });        
+    // });
+
+}}); // removeTask
+
+
 
 
             // Swaps two rows and changes the sort order to custom to display the swapped rows

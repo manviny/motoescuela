@@ -59,7 +59,7 @@
                         </div>
                         <div class="col-md-12">
                           <button type="submit" class="btn btn-primary pull-right" ng-click="guardaCalendario()">Guardar</button>
-                          <button type="submit" class="btn btn-primary pull-right" id="btnContactUs">Borrar</button>
+                          <button type="submit" class="btn btn-primary pull-right" ng-click="borrarTareas()">Borrar</button>
                           <!-- <input type="text" placeholder="classes" ng-model="classes"> -->
                           <input type="hidden" placeholder="color" ng-model="color">
                         </div>
@@ -77,7 +77,10 @@
                   <gantt first-day-of-week="1"
                     load-data="loadData = fn"
                     remove-data="removeData = fn"
+
                     save-data="saveData = fn"
+                    remove-task="removeTask = fn"
+
                     clear-data="clearData = fn"
                     sort-mode="name"
                     view-scale="scale"

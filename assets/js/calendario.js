@@ -204,6 +204,15 @@ demoApp.controller("ctrl", ['$scope', '$http', '$filter', function($scope, $http
      */
     $scope.guardaCalendario = function() {
         $scope.saveData(dbUrl);
+         // $("#guardaCalendario").click();
+    }
+
+    /**
+     * Borrar tareas intermitentes al pulsar boton borrar
+     * @return {[type]} [description]
+     */
+    $scope.borrarTareas = function() {
+        $scope.removeTask("443423445");
     }
 
 }]);
