@@ -58,7 +58,7 @@
                           </div>
                         </div>
                         <div class="col-md-12">
-                          <button type="submit" class="btn btn-primary pull-right" id="btnContactUs">Guardar</button>
+                          <button type="submit" class="btn btn-primary pull-right" ng-click="guardaCalendario()">Guardar</button>
                           <button type="submit" class="btn btn-primary pull-right" id="btnContactUs">Borrar</button>
                           <!-- <input type="text" placeholder="classes" ng-model="classes"> -->
                           <input type="hidden" placeholder="color" ng-model="color">

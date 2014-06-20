@@ -174,17 +174,13 @@ demoApp.controller("ctrl", ['$scope', '$http', '$filter', function($scope, $http
     };
 
 
-    $scope.guardaCalendario = function() {
-        $("#guardaCalendario").click();
-    }
-
     /**
      * Permite hacer cambios en una celda que ya contiene datos
      * @param  {[type]} event [description]
      * @return {[type]}       [description]
      */
     $scope.taskEvent = function(event) {
- $scope.saveData();
+
         // A task has been updated or clicked.
         console.log(event);
         // pone clase intermitente a las tareas que hagamos click
@@ -201,4 +197,13 @@ demoApp.controller("ctrl", ['$scope', '$http', '$filter', function($scope, $http
 
         console.log('Task event (by user: ' + event.userTriggered + '): ' + event.task.subject + ' (Custom data: ' + event.task.data + ')');
     };
+
+    /**
+     * Guarda el calendario
+     * @return {[type]} [description]
+     */
+    $scope.guardaCalendario = function() {
+        $scope.saveData(dbUrl);
+    }
+
 }]);

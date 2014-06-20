@@ -111,13 +111,12 @@ gantt.directive('gantt', ['Gantt', 'dateFunctions', 'mouseOffset', 'debounce', '
             };
 
 /**
- * Genera el Objeto calendario con todos los datos del calendario actual
+ * Guarda el dia actual en la BD indica en apiURL
  * @return {[type]} [description]
  */
-$scope.calendarioGuardar = function() {
-    
-    console.debug("GANTT",$scope.gantt.rows);
-    
+
+$scope.saveData({ fn: function(apiURL) {
+ 
     // fecha actual en el calendario
     var fecha = $filter('date')($scope.gantt.headers.day[0].date, "yyyy-MM-dd");
 
@@ -150,10 +149,13 @@ $scope.calendarioGuardar = function() {
     console.debug("Creado Objeto Calendario  listo para guardar", objetoCalendario)
 
     // Crea nuevo dia o hace update del actual
-    $http({ url: 'http://chocomputer.com:3005/api/calendarios', method: "PUT", data: objetoCalendario })
+    $http({ url: apiURL, method: "PUT", data: objetoCalendario })
     .then( function(response) { alert("Calendario guardado")}, function(response) { alert("fail") } );  
 
-}; // calendarioGuardar
+}}); // saveData
+
+
+
 
 /**
  * Borrar tareas qeu tienen clase intermitente
@@ -347,10 +349,7 @@ $scope.calendarioGuardar = function() {
             }});
 
 
-$scope.saveData({ fn: function(data) {
-console.log("hi mate")
 
-}});
             // Clear all existing rows and tasks
             $scope.removeAllData = function() {
                 $scope.gantt.removeRows();
