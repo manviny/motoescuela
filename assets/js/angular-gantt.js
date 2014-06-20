@@ -161,29 +161,30 @@ $scope.saveData({ fn: function(apiURL) {
 
 
 /**
- * Borrar tareas qeu tienen clase intermitente
+ * Borrar tareas que tienen clase intermitente
  */
 
 
 $scope.removeTask({ fn: function(data) {
- console.debug("xx","remove task");
-    // _($scope.gantt.rows).forEach(function(fila) { 
-    //     _(fila.tasks).forEach(function(hora) { 
-    //         if(hora.classes == 'intermitente') {
-    //             console.log( fila );
-    //             console.log( hora.id );
-    //             // $scope.removeData([]);
-    //             $scope.removeData([
-    //                 {"id": "IBR1-9083GFL", "tasks": [
-    //                     {"id": "IBR1-9083GFLIBR1-9083GFLIBR1-9083GFLIBR1-9083GFLIBR1-9083GFLIBR1-9083GFLIBR1-9083GFL1403193614224"}
-    //                 ]} // Remove order basket from Sprint 2
-    //             ]);
-    //             console.log( fila );
-    //             // $scope.calendarioGuardar();
-    //         }
+
+         
+    _($scope.gantt.rows).forEach(function(fila) { 
+        _(fila.tasks).forEach(function(hora) { 
+            if(hora.classes == 'intermitente') {
+                console.log( fila );
+                console.log( hora.id );
+                // $scope.removeData([]);
+                $scope.removeTasks([
+                    {"id": fila.id, "tasks": [
+                        {"id": hora.id}
+                    ]} // Remove order basket from Sprint 2
+                ]);
+                console.log( fila );
+                // $scope.calendarioGuardar();
+            }
                 
-    //     });        
-    // });
+        });        
+    });
 
 }}); // removeTask
 
@@ -331,7 +332,7 @@ $scope.removeTask({ fn: function(data) {
             // Remove data handler.
             // If a row has no tasks inside the complete row will be deleted.
             $scope.removeData({ fn: function(data) {
-
+                console.debug("data",data);
                 for (var i = 0, l = data.length; i < l; i++) {
                     var rowData = data[i];
 
@@ -356,7 +357,31 @@ $scope.removeTask({ fn: function(data) {
                 $scope.sortRows();
             }});
 
+            $scope.removeTasks = function(data) {
+                console.debug("data",data);
+                for (var i = 0, l = data.length; i < l; i++) {
+                    var rowData = data[i];
 
+                    if (rowData.tasks !== undefined && rowData.tasks.length > 0) {
+                        // Only delete the specified tasks but not the row and the other tasks
+
+                        if (rowData.id in $scope.gantt.rowsMap) {
+                            var row = $scope.gantt.rowsMap[rowData.id];
+
+                            for (var j = 0, k = rowData.tasks.length; j < k; j++) {
+                                row.removeTask(rowData.tasks[j].id);
+                            }
+
+                            $scope.raiseRowUpdatedEvent(row, false);
+                        }
+                    } else {
+                        // Delete the complete row
+                        $scope.gantt.removeRow(rowData.id);
+                    }
+                }
+
+                $scope.sortRows();
+            };
 
             // Clear all existing rows and tasks
             $scope.removeAllData = function() {

@@ -204,7 +204,6 @@ demoApp.controller("ctrl", ['$scope', '$http', '$filter', function($scope, $http
      */
     $scope.guardaCalendario = function() {
         $scope.saveData(dbUrl);
-         // $("#guardaCalendario").click();
     }
 
     /**
@@ -212,7 +211,7 @@ demoApp.controller("ctrl", ['$scope', '$http', '$filter', function($scope, $http
      * @return {[type]} [description]
      */
     $scope.borrarTareas = function() {
-        $scope.removeTask("443423445");
+        $scope.removeTask();
     }
 
 }]);
